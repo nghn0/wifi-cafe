@@ -1,0 +1,51 @@
+{% include "header.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/about-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <h1>Search</h1>
+          <span class="subheading">Search cafes by location</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+
+        {{loc.csrf_token}}
+        <h3>{{ render_form(loc) }}</h3>
+
+          {% if cafes %}
+            {% for cafe in cafes %}
+                  <div class="post-preview">
+          <!--        url_for('show_post', post_id=post.id)-->
+                  <img src="{{ cafe.img_url }}" height="250px" width="400px">
+                  <a href="{{ url_for('cafe_id', idc=cafe.id) }}">
+                    <h2 class="post-title">{{ cafe.name }}</h2>
+                    <h3 class="post-subtitle"> Loacated in {{ cafe.location }}</h3>
+                  </a>
+                </div>
+            {% endfor %}
+          {% endif %}
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}

@@ -1,0 +1,71 @@
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{cafe.img_url}}')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-heading">
+          <h1>{{ cafe.name }}</h1>
+          <h2 class="subheading">Located in {{ cafe.location}}</h2>
+          <span class="meta"
+            >Location:
+            <a href="{{ cafe.map_url }}">Map</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+<!--        post.body|safe -->
+        <ul>
+            {% if cafe.has_sockets %}
+                <li>Has Sockets</li>
+            {% else %}
+                <li>No Sockets</li>
+            {% endif %}
+
+            {% if cafe.has_toilet %}
+                <li>Has Toilet</li>
+            {% else %}
+                <li>No Toilet</li>
+            {% endif %}
+
+            {% if cafe.has_wifi %}
+                <li>Has WiFi</li>
+            {% else %}
+                <li>No WiFi</li>
+            {% endif %}
+
+            {% if cafe.can_take_calls %}
+                <li>Can Take Calls</li>
+            {% else %}
+                <li>Cannot Take Calls</li>
+            {% endif %}
+
+            <li>Seats Accommodation: {{ cafe.seats }}</li>
+            <li>Coffee Price: {{ cafe.coffee_price }}</li>
+        </ul>
+
+        {% if logged_in %}
+            <div class="d-flex justify-content-end mb-4">
+
+              <a
+                class="btn btn-primary float-right"
+                href="{{ url_for('edit_cafe', cafeid=cafe.id) }}"
+                >Edit</a
+              >
+            </div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</article>
+
+{% include "footer.html" %}
